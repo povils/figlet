@@ -4,8 +4,6 @@
  * This is the part of Povils open-source library.
  *
  * @author Povilas Susinskas
- *
- * @email povilassusinskas@gmail.com
  */
 
 namespace Povils\Figlet;
@@ -33,7 +31,7 @@ class FontManager
     const FIGLET_FORMAT = 'flf';
 
     /**
-     * The first five characters(signature) in the entire file must be "flf2a"l
+     * The first five characters(signature) in the entire file must be "flf2a".
      */
     const VALID_FONT_SIGNATURE = 'flf2a';
 
@@ -104,7 +102,7 @@ class FontManager
         );
 
         if($parameters['signature'] !== self::VALID_FONT_SIGNATURE){
-            throw new \InvalidArgumentException('Invalid font file signature ' . $parameters['signature']);
+            throw new \InvalidArgumentException('Invalid font file signature: ' . $parameters['signature']);
         }
 
         $this->font
@@ -116,6 +114,5 @@ class FontManager
             ->setCommentLines($parameters['comment_lines'])
             ->setPrintDirection($parameters['print_direction'])
             ->setFullLayout($parameters['full_layout']);
-
     }
 }

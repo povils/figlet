@@ -4,8 +4,6 @@
  * This is the part of Povils open-source library.
  *
  * @author Povilas Susinskas
- *
- * @email povilassusinskas@gmail.com
  */
 
 namespace Povils\Figlet;

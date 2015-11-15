@@ -4,8 +4,6 @@
  * This is the part of Povils open-source library.
  *
  * @author Povilas Susinskas
- *
- * @email povilassusinskas@gmail.com
  */
 
 namespace Povils\Figlet;
@@ -95,15 +93,12 @@ class Figlet implements FigletInterface
     {
         $this->font = $this->getFontManager()->loadFont($this->fontName, $this->fontDir);
 
-        $figletCharacters = [];
-        foreach (str_split($text) as $character) {
-            $figletCharacters[] = $this->getFigletCharacter($character);
-        }
+        $figletText = $this->generateFigletText($text);
 
         $figletText = $this
             ->getColorManager()
             ->colorize(
-                $this->combineFigletCharacters($figletCharacters),
+                $figletText,
                 $this->fontColor,
                 $this->backgroundColor
             );
@@ -169,6 +164,33 @@ class Figlet implements FigletInterface
         $this->stretching = $stretching;
 
         return $this;
+    }
+
+    /**
+     * @param string $text
+     *
+     * @return string
+     */
+    private function generateFigletText($text)
+    {
+        $figletCharacters = $this->getFigletCharacters($text);
+
+        return $this->combineFigletCharacters($figletCharacters);
+    }
+
+    /**
+     * @param $text
+     *
+     * @return array
+     */
+    private function getFigletCharacters($text)
+    {
+        $figletCharacters = [];
+        foreach (str_split($text) as $character) {
+            $figletCharacters[] = $this->getFigletCharacter($character);
+        }
+
+        return $figletCharacters;
     }
 
     /**
