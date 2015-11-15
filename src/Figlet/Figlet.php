@@ -246,7 +246,8 @@ class Figlet implements FigletInterface
     {
         $figletText = '';
 
-        for ($line = 0; $line < $this->font->getHeight(); $line++) {
+        $height = $this->font->getHeight();
+        for ($line = 0; $line < $height; $line++) {
             $singleLine = '';
             foreach ($figletCharacters as $charactersLines) {
                 $singleLine .= $charactersLines[$line] . $this->addStretching();
