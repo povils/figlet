@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Povils\\Figlet": "src/Figlet"
+      "Povils\\Figlet\\": "src/Figlet"
     }
   }
 }
