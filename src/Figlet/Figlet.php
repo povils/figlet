@@ -246,18 +246,12 @@ class Figlet implements FigletInterface
     {
         $figletText = '';
 
-        if (is_int($this->stretching) && 0 < $this->stretching) {
-            $stretchingSpace = ' ';
-        } else {
-            $stretchingSpace = '';
-        }
-
         for ($line = 0; $line < $this->font->getHeight(); $line++) {
             $singleLine = '';
             foreach ($figletCharacters as $charactersLines) {
-                $singleLine .= $charactersLines[$line] . str_repeat($stretchingSpace, $this->stretching);
+                $singleLine .= $charactersLines[$line] . $this->addStretching();
             }
-            $singleLine = preg_replace('/[\\r\\n]*/', '', $singleLine);
+            $singleLine = $this->removeNewlines($singleLine);
             $figletText .= $singleLine . "\n";
         }
 
@@ -286,5 +280,33 @@ class Figlet implements FigletInterface
         }
 
         return $this->fontManager;
+    }
+
+    /**
+     * @param string $singleLine
+     *
+     * @return string
+     */
+    private function removeNewlines($singleLine)
+    {
+        $singleLine = preg_replace('/[\\r\\n]*/', '', $singleLine);
+
+        return $singleLine;
+    }
+
+    /**
+     * Adds space(s) in the end to Figlet character.
+     *
+     * @return string
+     */
+    private function addStretching()
+    {
+        if (is_int($this->stretching) && 0 < $this->stretching) {
+            $stretchingSpace = ' ';
+        } else {
+            $stretchingSpace = '';
+        }
+
+        return str_repeat($stretchingSpace, $this->stretching);
     }
 }

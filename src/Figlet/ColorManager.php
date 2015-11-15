@@ -52,7 +52,7 @@ class ColorManager
     ];
 
     /**
-     * @param string $text
+     * @param string      $text
      * @param string|null $fontColor
      * @param string|null $backgroundColor
      *

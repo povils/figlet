@@ -49,20 +49,31 @@ class FontManager
      */
     public function loadFont($fontName, $fontDirectory)
     {
-        if(null === $fontName){
+        if (null === $fontName) {
             $fontName = self::DEFAULT_FONT;
         }
 
-        if(null === $fontDirectory)
-        {
+        if (null === $fontDirectory) {
             $fontDirectory = self::DEFAULT_FONT_DIRECTORY;
         }
 
-        if (null === $this->font || $fontName !== $this->font->getName()) {
-            $this->createFont($fontName, $fontDirectory);
-            $this->setFontParameters($this->font->getFileCollection());
+        if (null === $this->currentFont() || $fontName !== $this->currentFont()->getName()) {
+            $font = $this->createFont($fontName, $fontDirectory);
+            $this->setFontParameters($font);
+
+            return $font;
         }
 
+        return $this->currentFont();
+    }
+
+    /**
+     * Return current loaded font.
+     *
+     * @return Font
+     */
+    private function currentFont()
+    {
         return $this->font;
     }
 
@@ -77,7 +88,7 @@ class FontManager
     {
         $fileName = $fontDirectory . $fontName . '.' . self::FIGLET_FORMAT;
 
-        if(false === file_exists($fileName)){
+        if (false === file_exists($fileName)) {
             throw new \Exception('Could not open ' . $fileName);
         }
 
@@ -92,13 +103,13 @@ class FontManager
     }
 
     /**
-     * @param array $fileCollection
+     * @param Font $font
      */
-    private function setFontParameters($fileCollection)
+    private function setFontParameters($font)
     {
-        $parameters = $this->extractHeadlineParameters($fileCollection);
+        $parameters = $this->extractHeadlineParameters($font->getFileCollection());
 
-        $this->font
+        $font
             ->setSignature($parameters['signature'])
             ->setHardBlank($parameters['hard_blank'])
             ->setHeight($parameters['height'])
