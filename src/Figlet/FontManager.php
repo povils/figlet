@@ -88,7 +88,7 @@ class FontManager
      *
      * @return Font
      */
-    private function setFontParameters($font)
+    private function setFontParameters(Font $font)
     {
         $parameters = $this->extractHeadlineParameters($font->getFileCollection());
 
