@@ -80,11 +80,31 @@ class FontManager
     }
 
     /**
-     * Extracts Figlet headline parameters and sets to Font.
-     *
-     * @param $fileCollection
+     * @param array $fileCollection
      */
     private function setFontParameters($fileCollection)
+    {
+        $parameters = $this->extractHeadlineParameters($fileCollection);
+
+        $this->font
+            ->setSignature($parameters['signature'])
+            ->setHardBlank($parameters['hard_blank'])
+            ->setHeight($parameters['height'])
+            ->setMaxLength($parameters['max_length'])
+            ->setOldLayout($parameters['old_layout'])
+            ->setCommentLines($parameters['comment_lines'])
+            ->setPrintDirection($parameters['print_direction'])
+            ->setFullLayout($parameters['full_layout']);
+    }
+
+    /**
+     * Extracts Figlet headline parameters.
+     *
+     * @param array $fileCollection
+     *
+     * @return array
+     */
+    private function extractHeadlineParameters($fileCollection)
     {
         $parameters = [];
 
@@ -101,18 +121,10 @@ class FontManager
             $parameters['full_layout']
         );
 
-        if($parameters['signature'] !== self::VALID_FONT_SIGNATURE){
+        if ($parameters['signature'] !== self::VALID_FONT_SIGNATURE) {
             throw new \InvalidArgumentException('Invalid font file signature: ' . $parameters['signature']);
         }
 
-        $this->font
-            ->setSignature($parameters['signature'])
-            ->setHardBlank($parameters['hard_blank'])
-            ->setHeight($parameters['height'])
-            ->setMaxLength($parameters['max_length'])
-            ->setOldLayout($parameters['old_layout'])
-            ->setCommentLines($parameters['comment_lines'])
-            ->setPrintDirection($parameters['print_direction'])
-            ->setFullLayout($parameters['full_layout']);
+        return $parameters;
     }
 }
