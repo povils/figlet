@@ -63,9 +63,13 @@ class ColorManager
     {
         $coloredText = "";
 
-        $coloredText = $this->colorizeFont($fontColor, $coloredText);
+        if (null !== $fontColor) {
+            $coloredText = $this->colorizeFont($fontColor, $coloredText);
+        }
 
-        $coloredText = $this->colorizeBackground($backgroundColor, $coloredText);
+        if (null !== $backgroundColor) {
+            $coloredText = $this->colorizeBackground($backgroundColor, $coloredText);
+        }
 
         $coloredText .= $text . "\033[0m";
 
@@ -81,20 +85,17 @@ class ColorManager
      */
     private function colorizeFont($fontColor, $coloredText)
     {
-        if (null !== $fontColor) {
-            if (isset($this->fontColors[$fontColor])) {
-                $coloredText .= "\033[" . $this->fontColors[$fontColor] . "m";
+        if(isset($this->fontColors[$fontColor])){
+            $coloredText = $this->addColorCode($coloredText, $this->fontColors[$fontColor]);
 
-                return $coloredText;
-            } else {
-                throw new \Exception(
-                    'Font color "' . $fontColor . '" doesn\'t exist' . PHP_EOL .
-                    'Available font colors: ' . implode(',', $this->getFontColors())
-                );
-            }
+            return $coloredText;
         }
-
-        return $coloredText;
+        else {
+            throw new \Exception(
+                'Font color "' . $fontColor . '" doesn\'t exist' . PHP_EOL .
+                'Available font colors: ' . implode(',', $this->getFontColors())
+            );
+        }
     }
 
     /**
@@ -106,20 +107,17 @@ class ColorManager
      */
     private function colorizeBackground($backgroundColor, $coloredText)
     {
-        if (null !== $backgroundColor) {
-            if (isset($this->backgroundColors[$backgroundColor])) {
-                $coloredText .= "\033[" . $this->backgroundColors[$backgroundColor] . "m";
+        if(isset($this->backgroundColors[$backgroundColor])){
+            $coloredText = $this->addColorCode($coloredText, $this->backgroundColors[$backgroundColor]);
 
-                return $coloredText;
-            } else {
-                throw new \Exception(
-                    'Background color "' . $backgroundColor . '" doesn\'t exist ' . PHP_EOL .
-                    'Available background colors: ' . implode(',', $this->getBackgroundColors())
-                );
-            }
+            return $coloredText;
         }
-
-        return $coloredText;
+        else {
+            throw new \Exception(
+                'Background color "' . $backgroundColor . '" doesn\'t exist ' . PHP_EOL .
+                'Available background colors: ' . implode(',', $this->getBackgroundColors())
+            );
+        }
     }
 
     /**
@@ -140,5 +138,18 @@ class ColorManager
     private function getBackgroundColors()
     {
         return array_keys($this->backgroundColors);
+    }
+
+    /**
+     * @param string $coloredText
+     * @param string $color
+     *
+     * @return string
+     */
+    private function addColorCode($coloredText, $color)
+    {
+        $coloredText .= "\033[" . $color . "m";
+
+        return $coloredText;
     }
 }

@@ -49,17 +49,8 @@ class FontManager
      */
     public function loadFont($fontName, $fontDirectory)
     {
-        if (null === $fontName) {
-            $fontName = self::DEFAULT_FONT;
-        }
-
-        if (null === $fontDirectory) {
-            $fontDirectory = self::DEFAULT_FONT_DIRECTORY;
-        }
-
-        if (null === $this->currentFont() || $fontName !== $this->currentFont()->getName()) {
+        if ($this->needLoad($fontName)) {
             $font = $this->createFont($fontName, $fontDirectory);
-            $this->setFontParameters($font);
 
             return $font;
         }
@@ -70,7 +61,7 @@ class FontManager
     /**
      * Return current loaded font.
      *
-     * @return Font
+     * @return Font|null
      */
     private function currentFont()
     {
@@ -78,32 +69,46 @@ class FontManager
     }
 
     /**
-     * @param string $fontName
-     * @param string $fontDirectory
+     * @param string|null $fontName
+     * @param string|null $fontDirectory
      *
      * @return Font
      * @throws \Exception
      */
     private function createFont($fontName, $fontDirectory)
     {
-        $fileName = $fontDirectory . $fontName . '.' . self::FIGLET_FORMAT;
+        if (null === $fontName) {
+            $fontName = self::DEFAULT_FONT;
+        }
+
+        if (null === $fontDirectory) {
+            $fontDirectory = self::DEFAULT_FONT_DIRECTORY;
+        }
+
+        $fileName = $this->getFileName($fontName, $fontDirectory);
 
         if (false === file_exists($fileName)) {
             throw new \Exception('Could not open ' . $fileName);
         }
 
-        $this->font = new Font();
+        $font = new Font();
 
         $fileCollection = file($fileName);
 
-        $this->font->setFileCollection($fileCollection);
-        $this->font->setName($fontName);
+        $font->setFileCollection($fileCollection);
+        $font->setName($fontName);
 
-        return $this->font;
+        $font = $this->setFontParameters($font);
+
+        $this->setCurrentFont($font);
+
+        return $font;
     }
 
     /**
      * @param Font $font
+     *
+     * @return Font
      */
     private function setFontParameters($font)
     {
@@ -118,6 +123,8 @@ class FontManager
             ->setCommentLines($parameters['comment_lines'])
             ->setPrintDirection($parameters['print_direction'])
             ->setFullLayout($parameters['full_layout']);
+
+        return $font;
     }
 
     /**
@@ -149,5 +156,36 @@ class FontManager
         }
 
         return $parameters;
+    }
+
+    /**
+     * @param string $fontName
+     *
+     * @return bool
+     */
+    private function needLoad($fontName)
+    {
+        return null === $this->currentFont() || $fontName !== $this->currentFont()->getName();
+    }
+
+    /**
+     * @param string $fontName
+     * @param string $fontDirectory
+     *
+     * @return string
+     */
+    private function getFileName($fontName, $fontDirectory)
+    {
+        $fileName = $fontDirectory . $fontName . '.' . self::FIGLET_FORMAT;
+
+        return $fileName;
+    }
+
+    /**
+     * @param Font $font
+     */
+    private function setCurrentFont($font)
+    {
+        $this->font = $font;
     }
 }
