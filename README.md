@@ -5,3 +5,5 @@ Figlet text render
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/povils/figlet/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/povils/figlet/?branch=master)
 [![Total Downloads](https://poser.pugx.org/povils/figlet/downloads)](https://packagist.org/packages/povils/figlet)
 [![License](https://poser.pugx.org/povils/figlet/license)](https://packagist.org/packages/povils/figlet)
+
+Not stable
