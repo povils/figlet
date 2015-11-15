@@ -210,7 +210,7 @@ class Figlet implements FigletInterface
 
         foreach ($lines as $line) {
             $figletCharacter[] = str_replace(
-                ['@', '$'],
+                ['@', $this->font->getHardBlank()],
                 ['', ' '],
                 $line
             );
