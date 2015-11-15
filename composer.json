@@ -1,0 +1,25 @@
+{
+  "name": "povils/figlet",
+  "type": "library",
+  "description": "Figlet text generator",
+  "keywords": ["github", "figlet", "ascii", "text"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Povilas Susinskas",
+      "email": "povilassusinskas@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+  },
+  "require-dev": {
+    "ongr/ongr-strict-standard": "~2.1",
+    "phpunit/phpunit": "~4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Povils\\Figlet": "src/Figlet"
+    }
+  }
+}
