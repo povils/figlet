@@ -63,9 +63,29 @@ class ColorManager
     {
         $coloredText = "";
 
-        if(null !== $fontColor){
+        $coloredText = $this->colorizeFont($fontColor, $coloredText);
+
+        $coloredText = $this->colorizeBackground($backgroundColor, $coloredText);
+
+        $coloredText .= $text . "\033[0m";
+
+        return $coloredText;
+    }
+
+    /**
+     * @param string $fontColor
+     * @param string $coloredText
+     *
+     * @return string
+     * @throws \Exception
+     */
+    private function colorizeFont($fontColor, $coloredText)
+    {
+        if (null !== $fontColor) {
             if (isset($this->fontColors[$fontColor])) {
                 $coloredText .= "\033[" . $this->fontColors[$fontColor] . "m";
+
+                return $coloredText;
             } else {
                 throw new \Exception(
                     'Font color "' . $fontColor . '" doesn\'t exist' . PHP_EOL .
@@ -74,17 +94,30 @@ class ColorManager
             }
         }
 
-        if(null !== $backgroundColor){
+        return $coloredText;
+    }
+
+    /**
+     * @param string $backgroundColor
+     * @param string $coloredText
+     *
+     * @return string
+     * @throws \Exception
+     */
+    private function colorizeBackground($backgroundColor, $coloredText)
+    {
+        if (null !== $backgroundColor) {
             if (isset($this->backgroundColors[$backgroundColor])) {
                 $coloredText .= "\033[" . $this->backgroundColors[$backgroundColor] . "m";
+
+                return $coloredText;
             } else {
                 throw new \Exception(
-                    'Font color "' . $backgroundColor . '" doesn\'t exist ' . PHP_EOL .
-                    'Available font colors: ' . implode(',', $this->getBackgroundColors())
+                    'Background color "' . $backgroundColor . '" doesn\'t exist ' . PHP_EOL .
+                    'Available background colors: ' . implode(',', $this->getBackgroundColors())
                 );
             }
         }
-        $coloredText .= $text . "\033[0m";
 
         return $coloredText;
     }
