@@ -59,21 +59,8 @@ class FontManager
         }
 
         if (null === $this->font || $fontName !== $this->font->getName()) {
-            $fileName = $fontDirectory . $fontName . '.' . self::FIGLET_FORMAT;
-
-            if(false === file_exists($fileName)){
-                throw new \Exception('Could not open ' . $fileName);
-            }
-
-            $this->font = new Font();
-
-            $fileCollection = file($fileName);
-
-            $this->font->setFileCollection($fileCollection);
-            $this->font->setName($fontName);
-
-
-            $this->setFontParameters($fileCollection);
+            $this->createFont($fontName, $fontDirectory);
+            $this->setFontParameters($this->font->getFileCollection());
         }
 
         return $this->font;
@@ -126,5 +113,30 @@ class FontManager
         }
 
         return $parameters;
+    }
+
+    /**
+     * @param string $fontName
+     * @param string $fontDirectory
+     *
+     * @return Font
+     * @throws \Exception
+     */
+    private function createFont($fontName, $fontDirectory)
+    {
+        $fileName = $fontDirectory . $fontName . '.' . self::FIGLET_FORMAT;
+
+        if(false === file_exists($fileName)){
+            throw new \Exception('Could not open ' . $fileName);
+        }
+
+        $this->font = new Font();
+
+        $fileCollection = file($fileName);
+
+        $this->font->setFileCollection($fileCollection);
+        $this->font->setName($fontName);
+
+        return $this->font;
     }
 }
