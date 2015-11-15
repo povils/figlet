@@ -61,7 +61,7 @@ class ColorManager
      */
     public function colorize($text, $fontColor, $backgroundColor)
     {
-        $coloredText = "";
+        $coloredText = '';
 
         if (null !== $fontColor) {
             $coloredText = $this->colorizeFont($fontColor, $coloredText);

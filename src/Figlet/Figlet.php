@@ -48,12 +48,12 @@ class Figlet implements FigletInterface
     /**
      * @var string
      */
-    private $fontName;
+    private $fontName = 'graceful';
 
     /**
      * @var string
      */
-    private $fontDir;
+    private $fontDir = __DIR__ . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
 
     /**
      * @var int

@@ -16,16 +16,6 @@ namespace Povils\Figlet;
 class FontManager
 {
     /**
-     * Defines default Figlet font when font is not set.
-     */
-    const DEFAULT_FONT = 'graceful';
-
-    /**
-     * Defines default Figlet font directory when fontDirectory is not set.
-     */
-    const DEFAULT_FONT_DIRECTORY = __DIR__ . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
-
-    /**
      * Defines Figlet file format.
      */
     const FIGLET_FORMAT = 'flf';
@@ -41,8 +31,8 @@ class FontManager
     private $font;
 
     /**
-     * @param string|null $fontName
-     * @param string|null $fontDirectory
+     * @param string $fontName
+     * @param string $fontDirectory
      *
      * @return Font
      * @throws \Exception
@@ -69,29 +59,17 @@ class FontManager
     }
 
     /**
-     * @param string|null $fontName
-     * @param string|null $fontDirectory
+     * @param string $fontName
+     * @param string $fontDirectory
      *
      * @return Font
      * @throws \Exception
      */
     private function createFont($fontName, $fontDirectory)
     {
-        if (null === $fontName) {
-            $fontName = self::DEFAULT_FONT;
-        }
-
-        if (null === $fontDirectory) {
-            $fontDirectory = self::DEFAULT_FONT_DIRECTORY;
-        }
+        $font = new Font();
 
         $fileName = $this->getFileName($fontName, $fontDirectory);
-
-        if (false === file_exists($fileName)) {
-            throw new \Exception('Could not open ' . $fileName);
-        }
-
-        $font = new Font();
 
         $fileCollection = file($fileName);
 
@@ -173,10 +151,15 @@ class FontManager
      * @param string $fontDirectory
      *
      * @return string
+     * @throws \Exception
      */
     private function getFileName($fontName, $fontDirectory)
     {
         $fileName = $fontDirectory . $fontName . '.' . self::FIGLET_FORMAT;
+
+        if (false === file_exists($fileName)) {
+            throw new \Exception('Could not open ' . $fileName);
+        }
 
         return $fileName;
     }
