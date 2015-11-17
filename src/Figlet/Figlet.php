@@ -200,8 +200,8 @@ class Figlet implements FigletInterface
      */
     private function getFigletCharacter($character)
     {
-        if (isset($this->characters[$character])) {
-            return $this->characters[$character];
+        if (isset($this->characters[$this->fontName][$character])) {
+            return $this->characters[$this->fontName][$character];
         }
 
         $figletCharacter = [];
@@ -216,7 +216,7 @@ class Figlet implements FigletInterface
             );
         }
 
-        $this->characters[$character] = $figletCharacter;
+        $this->characters[$this->fontName][$character] = $figletCharacter;
 
         return $figletCharacter;
     }
