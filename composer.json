@@ -1,8 +1,8 @@
 {
   "name": "povils/figlet",
   "type": "library",
-  "description": "Figlet text generator",
-  "keywords": ["github", "figlet", "ascii", "text"],
+  "description": "Figlet text generator - PHP",
+  "keywords": ["github", "figlet", "ascii", "text", "php"],
   "license": "MIT",
   "authors": [
     {
