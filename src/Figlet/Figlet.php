@@ -48,17 +48,17 @@ class Figlet implements FigletInterface
     /**
      * @var string
      */
-    private $fontName = 'big';
+    private $fontName;
 
     /**
      * @var string
      */
-    private $fontDir = __DIR__ . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
+    private $fontDir;
 
     /**
      * @var int
      */
-    private $stretching = 0;
+    private $stretching;
 
     /**
      * This array will hold used Figlet characters.
@@ -66,6 +66,16 @@ class Figlet implements FigletInterface
      * @var array
      */
     private $characters = [];
+
+    /**
+     * Figlet constructor.
+     */
+    public function __construct()
+    {
+        $this->fontDir = __DIR__ . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
+        $this->fontName = 'big';
+        $this->stretching = 0;
+    }
 
     /**
      * Outputs Figlet text.
