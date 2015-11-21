@@ -306,6 +306,7 @@ class Figlet implements FigletInterface
             $stretchingSpace = ' ';
         } else {
             $stretchingSpace = '';
+            $this->stretching = 0;
         }
 
         return str_repeat($stretchingSpace, $this->stretching);
