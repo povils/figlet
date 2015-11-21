@@ -163,6 +163,15 @@ class Figlet implements FigletInterface
     }
 
     /**
+     * Unset some arrays and objects.
+     */
+    public function clear()
+    {
+        unset($this->characters);
+        unset($this->font);
+    }
+
+    /**
      * Generates Figlet text.
      *
      * @param string $text
