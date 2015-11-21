@@ -10,7 +10,6 @@
 
     <filter>
         <whitelist>
-            <directory>./</directory>
             <exclude>
                 <directory>./vendor</directory>
             </exclude>

@@ -31,6 +31,8 @@ class FontManager
     private $font;
 
     /**
+     * Loads Font.
+     *
      * @param string $fontName
      * @param string $fontDirectory
      *
@@ -59,6 +61,8 @@ class FontManager
     }
 
     /**
+     * Creates Font.
+     *
      * @param string $fontName
      * @param string $fontDirectory
      *
@@ -137,6 +141,8 @@ class FontManager
     }
 
     /**
+     * Checks if it is needed to load font.
+     *
      * @param string $fontName
      *
      * @return bool

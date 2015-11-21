@@ -48,7 +48,7 @@ class Figlet implements FigletInterface
     /**
      * @var string
      */
-    private $fontName = 'graceful';
+    private $fontName = 'big';
 
     /**
      * @var string
@@ -84,7 +84,7 @@ class Figlet implements FigletInterface
     /**
      * Renders Figlet text.
      *
-     * @param $text
+     * @param string $text
      *
      * @return string
      * @throws \Exception
@@ -95,13 +95,9 @@ class Figlet implements FigletInterface
 
         $figletText = $this->generateFigletText($text);
 
-        $figletText = $this
-            ->getColorManager()
-            ->colorize(
-                $figletText,
-                $this->fontColor,
-                $this->backgroundColor
-            );
+        if ($this->fontColor || $this->backgroundColor) {
+            $figletText = $this->colorize($figletText);
+        }
 
         return $figletText;
     }
@@ -167,6 +163,8 @@ class Figlet implements FigletInterface
     }
 
     /**
+     * Generates Figlet text.
+     *
      * @param string $text
      *
      * @return string
@@ -179,7 +177,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * @param $text
+     * @param string $text
      *
      * @return array
      */
@@ -228,9 +226,9 @@ class Figlet implements FigletInterface
      */
     private function getFigletCharacterLines($character)
     {
-        $letterStarts = ((ord($character) - self::FIRST_ASCII_CHARACTER) * $this->font->getHeight()) + 1 + $this->font->getCommentLines();
+        $letterStartPosition = $this->getLetterStartPosition($character);
 
-        $lines = array_slice($this->font->getFileCollection(), $letterStarts, $this->font->getHeight());
+        $lines = array_slice($this->font->getFileCollection(), $letterStartPosition, $this->font->getHeight());
 
         return $lines;
     }
@@ -260,6 +258,26 @@ class Figlet implements FigletInterface
     }
 
     /**
+     * Colorize text.
+     *
+     * @param string $figletText
+     *
+     * @return string
+     */
+    private function colorize($figletText)
+    {
+        $figletText = $this
+            ->getColorManager()
+            ->colorize(
+                $figletText,
+                $this->fontColor,
+                $this->backgroundColor
+            );
+
+        return $figletText;
+    }
+
+    /**
      * @return ColorManager
      */
     private function getColorManager()
@@ -284,6 +302,8 @@ class Figlet implements FigletInterface
     }
 
     /**
+     * Remove newlines characters.
+     *
      * @param string $singleLine
      *
      * @return string
@@ -310,5 +330,15 @@ class Figlet implements FigletInterface
         }
 
         return str_repeat($stretchingSpace, $this->stretching);
+    }
+
+    /**
+     * @param string $character
+     *
+     * @return int
+     */
+    private function getLetterStartPosition($character)
+    {
+        return ((ord($character) - self::FIRST_ASCII_CHARACTER) * $this->font->getHeight()) + 1 + $this->font->getCommentLines();
     }
 }
