@@ -14,5 +14,6 @@
 [![Total Downloads](https://poser.pugx.org/povils/figlet/downloads)](https://packagist.org/packages/povils/figlet)
 [![License](https://poser.pugx.org/povils/figlet/license)](https://packagist.org/packages/povils/figlet)
 
-Not stable
+Currently no tests.
+
 
