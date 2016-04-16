@@ -94,7 +94,7 @@ class ColorManager
 
             return $coloredText;
         } else {
-            throw new \Exception(
+            throw new \InvalidArgumentException(
                 'Font color "' . $fontColor . '" doesn\'t exist' . PHP_EOL .
                 'Available font colors: ' . implode(',', $this->getFontColors())
             );
@@ -117,7 +117,7 @@ class ColorManager
 
             return $coloredText;
         } else {
-            throw new \Exception(
+            throw new \InvalidArgumentException(
                 'Background color "' . $backgroundColor . '" doesn\'t exist ' . PHP_EOL .
                 'Available background colors: ' . implode(',', $this->getBackgroundColors())
             );
