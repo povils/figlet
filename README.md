@@ -14,6 +14,41 @@
 [![Total Downloads](https://poser.pugx.org/povils/figlet/downloads)](https://packagist.org/packages/povils/figlet)
 [![License](https://poser.pugx.org/povils/figlet/license)](https://packagist.org/packages/povils/figlet)
 
-Currently no tests.
+## Installation
+
+- Available as [Composer] package [povils/figlet].
 
 
+[composer]: http://getcomposer.org/
+[povils/figlet]: https://packagist.org/packages/povils/figlet
+
+## What is this? And what is Figlet?
+
+This is Php5 library which renders or outputs Figlet text in your console.
+Figlet is a computer program that generates text banners, in a variety of typefaces, composed of letters made up of conglomerations of smaller ASCII characters
+
+## Usage
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Povils\Figlet\Figlet;
+
+// Default font is "big"
+$figlet = new Figlet();
+
+//Outputs "Figlet" text using "small" red font in blue background.
+$figlet
+    ->setFont('small')
+    ->setFontColor('red')
+    ->setBackgroundColor('blue')
+    ->write('Figlet');
+
+//Returns rendered string.
+$renderedFiglet = $figlet->render('Another Figlet')
+
+- setFontDir(__DIR_ . '/fonts') //changes default font directory
+- setFontStretching(3) // Add spaces between letters
+```

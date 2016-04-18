@@ -78,11 +78,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * Outputs Figlet text.
-     *
-     * @param string $text
-     *
-     * @return FigletInterface
+     * {@inheritdoc}
      */
     public function write($text)
     {
@@ -92,12 +88,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * Renders Figlet text.
-     *
-     * @param string $text
-     *
-     * @return string
-     * @throws \Exception
+     * {@inheritdoc}
      */
     public function render($text)
     {
@@ -113,9 +104,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * @param string $color
-     *
-     * @return FigletInterface
+     * {@inheritdoc}
      */
     public function setBackgroundColor($color)
     {
@@ -125,9 +114,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * @param string $color
-     *
-     * @return FigletInterface
+     * {@inheritdoc}
      */
     public function setFontColor($color)
     {
@@ -137,10 +124,8 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * @param string $fontName
-     *
-     * @return FigletInterface
-     */
+     * {@inheritdoc}
+     *//
     public function setFont($fontName)
     {
         $this->fontName = $fontName;
@@ -149,9 +134,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * @param string $fontDir
-     *
-     * @return FigletInterface
+     * {@inheritdoc}
      */
     public function setFontDir($fontDir)
     {
@@ -161,9 +144,7 @@ class Figlet implements FigletInterface
     }
 
     /**
-     * @param int $stretching
-     *
-     * @return FigletInterface
+     * {@inheritdoc}
      */
     public function setFontStretching($stretching)
     {
