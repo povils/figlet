@@ -125,7 +125,7 @@ class Figlet implements FigletInterface
 
     /**
      * {@inheritdoc}
-     *//
+     */
     public function setFont($fontName)
     {
         $this->fontName = $fontName;
