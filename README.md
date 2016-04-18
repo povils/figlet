@@ -16,7 +16,11 @@
 
 ## Installation
 
-- Available as [Composer] package [povils/figlet].
+ Available as [Composer] package [povils/figlet].
+
+```
+composer require povils/figlet "dev-master"
+```
 
 
 [composer]: http://getcomposer.org/
