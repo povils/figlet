@@ -1,10 +1,20 @@
 <?php
+
+/**
+ * This is the part of Povils open-source library.
+ *
+ * @author Povilas Susinskas
+ */
+
+namespace Povils\Figlet\Tests;
+
 use Povils\Figlet\Figlet;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class FigletTest
  */
-class FigletTest extends PHPUnit_Framework_TestCase
+class FigletTest extends TestCase
 {
     public function testRender_Default()
     {
