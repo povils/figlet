@@ -53,6 +53,6 @@ $figlet
 //Returns rendered string.
 $renderedFiglet = $figlet->render('Another Figlet')
 
-- setFontDir(__DIR_ . '/fonts') //changes default font directory
+- setFontDir(__DIR_ . '/fonts') // Change default font directory
 - setFontStretching(3) // Add spaces between letters
 ```
