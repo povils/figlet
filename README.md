@@ -56,3 +56,16 @@ $renderedFiglet = $figlet->render('Another Figlet')
 - setFontDir(__DIR_ . '/fonts') // Change default font directory
 - setFontStretching(3) // Add spaces between letters
 ```
+
+#### Also there is figlet command line. Usage is quite straightforward.
+```bash
+    ./figlet 'some figlet text' --font block --color yellow
+```
+
+##### To make figlet executable from everywhere
+ - (Linux and OSX) Symlink figlet script file to one of the $PATH (e.g /usr/local/bin/figlet)
+
+##### For more options:
+```bash
+    figlet -h
+```
